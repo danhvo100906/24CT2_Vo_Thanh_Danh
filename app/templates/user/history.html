@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Lịch sử chat{% endblock %}
+
+{% block content %}
+<div class="user-layout">
+    <nav class="sidebar">
+        <h3>StudyBot</h3>
+        <a href="{{ url_for('main.dashboard') }}">Trò chuyện</a>
+        <a href="{{ url_for('main.chat_history') }}">Lịch sử chat</a>
+        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+    </nav>
+
+    <main class="content">
+        <h2>Lịch sử trò chuyện</h2>
+        {% for h in history %}
+        <div class="history-item">
+            <p><strong>Bạn:</strong> {{ h.message }}</p>
+            <p><strong>StudyBot:</strong> {{ h.response }}</p>
+            <small>{{ h.created_at }}</small>
+        </div>
+        <hr>
+        {% endfor %}
+    </main>
+</div>
+{% endblock %}

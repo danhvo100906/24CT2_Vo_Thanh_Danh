@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Trang quản trị{% endblock %}
+
+{% block content %}
+<div class="admin-layout">
+    <nav class="sidebar">
+        <h3>Admin Panel</h3>
+        <a href="{{ url_for('main.admin_dashboard') }}">Tổng quan</a>
+        <a href="{{ url_for('main.admin_users') }}">Quản lý người dùng</a>
+        <a href="#">Quản lý dữ liệu huấn luyện</a>
+        <a href="#">Quản lý tài liệu</a>
+        <a href="#">Giám sát hội thoại</a>
+        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+    </nav>
+
+    <main class="content">
+        <h2>Xin chào, {{ user.username }} (Admin)</h2>
+        <div class="stat-card">
+            <p>Tổng số người dùng</p>
+            <h1>{{ total_users }}</h1>
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Quản lý người dùng{% endblock %}
+
+{% block content %}
+<div class="admin-layout">
+    <nav class="sidebar">
+        <h3>Admin Panel</h3>
+        <a href="{{ url_for('main.admin_dashboard') }}">Tổng quan</a>
+        <a href="{{ url_for('main.admin_users') }}">Quản lý người dùng</a>
+        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+    </nav>
+
+    <main class="content">
+        <h2>Danh sách người dùng</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Tên đăng nhập</th>
+                <th>Ngày tạo</th>
+            </tr>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.username }}</td>
+                <td>{{ u.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+</div>
+{% endblock %}

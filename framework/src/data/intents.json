@@ -1,0 +1,74 @@
+{
+    "intents": [
+        {
+            "tag": "chao_hoi",
+            "patterns": [
+                "Xin chào",
+                "Chào bạn",
+                "Hi",
+                "Hello",
+                "Chào chatbot"
+            ],
+            "responses": [
+                "Chào bạn! Mình có thể giúp gì cho việc học của bạn?",
+                "Xin chào! Bạn muốn hỏi về chủ đề gì?"
+            ]
+        },
+        {
+            "tag": "tam_biet",
+            "patterns": [
+                "Tạm biệt",
+                "Bye",
+                "Hẹn gặp lại",
+                "Thoát"
+            ],
+            "responses": [
+                "Tạm biệt, chúc bạn học tốt!",
+                "Hẹn gặp lại bạn nhé!"
+            ]
+        },
+        {
+            "tag": "cam_on",
+            "patterns": [
+                "Cảm ơn",
+                "Thank you",
+                "Cảm ơn bạn nhiều"
+            ],
+            "responses": [
+                "Không có gì, rất vui được giúp bạn!",
+                "Bạn cứ hỏi thêm nếu cần nhé!"
+            ]
+        },
+        {
+            "tag": "hoi_khai_niem",
+            "patterns": [
+                "Machine learning là gì",
+                "Định nghĩa deep learning",
+                "Giải thích giúp mình về mạng neural",
+                "NLP là gì"
+            ],
+            "responses": [
+                "Đây là khái niệm thuộc lĩnh vực trí tuệ nhân tạo. Bạn muốn mình giải thích chi tiết hơn không?",
+                "Mình sẽ tìm thông tin chi tiết về khái niệm này cho bạn."
+            ]
+        },
+        {
+            "tag": "hoi_tai_lieu",
+            "patterns": [
+                "Có tài liệu nào về chủ đề này không",
+                "Gợi ý sách tham khảo",
+                "Cho mình link học thêm"
+            ],
+            "responses": [
+                "Mình sẽ tìm tài liệu liên quan trong kho dữ liệu đã cập nhật cho bạn."
+            ]
+        },
+        {
+            "tag": "khong_hieu",
+            "patterns": [],
+            "responses": [
+                "Xin lỗi, mình chưa hiểu câu hỏi của bạn. Bạn có thể diễn đạt rõ hơn không?"
+            ]
+        }
+    ]
+}

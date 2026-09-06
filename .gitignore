@@ -1,2 +1,22 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+
+# Virtual environment (nếu có dùng sau này)
+venv/
+env/
+
+# Database (chứa dữ liệu tài khoản/mật khẩu thật)
+instance/
+*.db
+
+# Model đã huấn luyện (tùy chọn — có thể để lại nếu muốn nộp kèm)
+# framework/src/model/data.pth
+
+# IDE
+.vscode/
+.idea/
+
+# Cache PyTorch/NLTK (nếu vô tình tạo trong thư mục dự án)
+nltk_data/

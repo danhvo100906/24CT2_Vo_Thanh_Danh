@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+<div class="user-layout">
+    <nav class="sidebar">
+        <h3>StudyBot</h3>
+        <a href="{{ url_for('main.dashboard') }}">Trò chuyện</a>
+        <a href="{{ url_for('main.chat_history') }}">Lịch sử chat</a>
+        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+    </nav>
+
+    <main class="content chat-main">
+        <h2>Xin chào, {{ user.username }} 👋</h2>
+
+        <div id="chat-box" class="chat-box">
+            <div class="msg bot">Chào bạn! Mình là StudyBot, hỏi mình bất cứ điều gì về học tập nhé.</div>
+        </div>
+
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="chat-input" placeholder="Nhập câu hỏi..." autocomplete="off" required>
+            <button type="submit">Gửi</button>
+        </form>
+    </main>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = 'msg ' + sender;
+        div.textContent = text;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        chatInput.value = '';
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            const data = await res.json();
+            addMessage(data.response, 'bot');
+        } catch (err) {
+            addMessage('Có lỗi xảy ra, thử lại sau.', 'bot');
+        }
+    });
+</script>
+{% endblock %}
