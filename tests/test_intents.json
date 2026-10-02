@@ -1,0 +1,426 @@
+[
+    {
+        "question": "Xin chào bot ơi",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Chào bạn, mình cần hỗ trợ",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Hello StudyBot",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Hi bot",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Có ai trực ở đây không ạ",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Chào ad",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Good morning bot",
+        "expected_intent": "chao_hoi"
+    },
+    {
+        "question": "Tạm biệt bot nhé",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Bye bot mình đi ngủ đây",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Hẹn gặp lại bạn sau",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Thoát chat",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Mình đi học đây bye",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Cya later",
+        "expected_intent": "tam_biet"
+    },
+    {
+        "question": "Cảm ơn bot nhiều nhé",
+        "expected_intent": "cam_on"
+    },
+    {
+        "question": "Thank you so much",
+        "expected_intent": "cam_on"
+    },
+    {
+        "question": "Rất hữu ích cảm ơn bạn",
+        "expected_intent": "cam_on"
+    },
+    {
+        "question": "Hay quá thanks bot",
+        "expected_intent": "cam_on"
+    },
+    {
+        "question": "Ok cảm ơn bạn đã giải đáp",
+        "expected_intent": "cam_on"
+    },
+    {
+        "question": "Bot có thể giúp gì cho mình",
+        "expected_intent": "tro_giup"
+    },
+    {
+        "question": "Hướng dẫn sử dụng chatbot",
+        "expected_intent": "tro_giup"
+    },
+    {
+        "question": "StudyBot làm được những việc gì",
+        "expected_intent": "tro_giup"
+    },
+    {
+        "question": "Phạm vi hỗ trợ của bot gồm những gì",
+        "expected_intent": "tro_giup"
+    },
+    {
+        "question": "Làm sao để tra cứu thông tin trên bot",
+        "expected_intent": "tro_giup"
+    },
+    {
+        "question": "Tìm tài liệu môn công nghệ phần mềm",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Cho mình xin giáo trình môn csdl",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Có slide bài giảng môn python không",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Tài liệu môn mạng máy tính",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Xin link slide môn cấu trúc dữ liệu và giải thuật",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Giáo trình pdf môn lập trình web",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Kho tài liệu học tập khoa cntt",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Tài liệu cnpm",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Tài liệu môn csdl",
+        "expected_intent": "tai_lieu_hoc_tap"
+    },
+    {
+        "question": "Xin đề thi môn công nghệ phần mềm",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Đề thi cuối kỳ môn python các năm trước",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Ngân hàng câu hỏi ôn tập môn csdl",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Đề thi giữa kỳ mạng máy tính",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Bài tập lớn mẫu môn lập trình web",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Đề kiểm tra cấu trúc dữ liệu",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Đề ôn thi học kỳ",
+        "expected_intent": "de_thi_on_tap"
+    },
+    {
+        "question": "Môn công nghệ phần mềm mấy tín chỉ",
+        "expected_intent": "thong_tin_hoc_phan"
+    },
+    {
+        "question": "Môn cơ sở dữ liệu học những nội dung gì",
+        "expected_intent": "thong_tin_hoc_phan"
+    },
+    {
+        "question": "Thông tin học phần mạng máy tính",
+        "expected_intent": "thong_tin_hoc_phan"
+    },
+    {
+        "question": "Cấu trúc dữ liệu và giải thuật bao nhiêu tín chỉ",
+        "expected_intent": "thong_tin_hoc_phan"
+    },
+    {
+        "question": "Mô tả học phần lập trình python và ai",
+        "expected_intent": "thong_tin_hoc_phan"
+    },
+    {
+        "question": "Machine learning là gì",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Định nghĩa deep learning",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Giải thích 4 tính chất OOP",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Chuẩn hóa cơ sở dữ liệu là gì",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Mô hình mạng OSI 7 tầng gồm những tầng nào",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "REST API là gì",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Khái niệm mạng nơ ron nhân tạo",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Thuật toán QuickSort hoạt động thế nào",
+        "expected_intent": "hoi_kien_thuc"
+    },
+    {
+        "question": "Học phí một tín chỉ bao nhiêu tiền",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Đơn giá tín chỉ lý thuyết và thực hành",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Cách tính học phí một học kỳ",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Học phí ngành công nghệ thông tin năm nay",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Một kỳ học khoảng bao nhiêu tiền học phí",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Biểu phí tín chỉ năm học 2024-2025",
+        "expected_intent": "hoc_phi"
+    },
+    {
+        "question": "Hạn nộp học phí học kỳ này khi nào",
+        "expected_intent": "han_dong_hoc_phi"
+    },
+    {
+        "question": "Bao giờ hết hạn đóng tiền học",
+        "expected_intent": "han_dong_hoc_phi"
+    },
+    {
+        "question": "Trễ hạn nộp học phí có bị cấm thi không",
+        "expected_intent": "han_dong_hoc_phi"
+    },
+    {
+        "question": "Làm sao để xin gia hạn nộp học phí",
+        "expected_intent": "han_dong_hoc_phi"
+    },
+    {
+        "question": "Thời hạn đóng học phí trong mấy tuần",
+        "expected_intent": "han_dong_hoc_phi"
+    },
+    {
+        "question": "Hướng dẫn nộp học phí qua ngân hàng",
+        "expected_intent": "cach_dong_hoc_phi"
+    },
+    {
+        "question": "Số tài khoản đóng học phí trường kiến trúc",
+        "expected_intent": "cach_dong_hoc_phi"
+    },
+    {
+        "question": "Cú pháp chuyển khoản nộp học phí",
+        "expected_intent": "cach_dong_hoc_phi"
+    },
+    {
+        "question": "Thanh toán học phí bằng VietQR như thế nào",
+        "expected_intent": "cach_dong_hoc_phi"
+    },
+    {
+        "question": "Cách đóng học phí online trên cổng sinh viên",
+        "expected_intent": "cach_dong_hoc_phi"
+    },
+    {
+        "question": "Điều kiện nhận học bổng khuyến khích học tập",
+        "expected_intent": "hoc_bong"
+    },
+    {
+        "question": "Điểm GPA bao nhiêu thì được học bổng giỏi",
+        "expected_intent": "hoc_bong"
+    },
+    {
+        "question": "Học bổng xuất sắc cần điểm rèn luyện bao nhiêu",
+        "expected_intent": "hoc_bong"
+    },
+    {
+        "question": "Chính sách miễn giảm học phí cho sinh viên",
+        "expected_intent": "hoc_bong"
+    },
+    {
+        "question": "Bị điểm F có được xét học bổng không",
+        "expected_intent": "hoc_bong"
+    },
+    {
+        "question": "Cách tính điểm GPA theo thang điểm 4",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Điểm chữ A B C D F quy đổi ra mấy điểm",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Điều kiện bị cảnh báo học vụ là gì",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Bị mấy lần cảnh báo học vụ thì bị buộc thôi học",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Điểm F có phải học lại không",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Quy định rút môn học trong học kỳ",
+        "expected_intent": "quy_che_tin_chi"
+    },
+    {
+        "question": "Làm sao để xin giấy xác nhận sinh viên",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Xin giấy tạm hoãn nghĩa vụ quân sự ở đâu",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Mất thẻ sinh viên làm lại thế nào",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Thủ tục vay vốn ngân hàng chính sách",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Thủ tục xin bảo lưu kết quả học tập",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Xin cấp bảng điểm tạm thời tại phòng nào",
+        "expected_intent": "thu_tuc_sinh_vien"
+    },
+    {
+        "question": "Số điện thoại phòng đào tạo",
+        "expected_intent": "lien_he"
+    },
+    {
+        "question": "Email phòng công tác sinh viên",
+        "expected_intent": "lien_he"
+    },
+    {
+        "question": "Địa chỉ văn phòng khoa công nghệ thông tin",
+        "expected_intent": "lien_he"
+    },
+    {
+        "question": "Liên hệ phòng kế hoạch tài chính",
+        "expected_intent": "lien_he"
+    },
+    {
+        "question": "Hotline hỗ trợ sinh viên trường",
+        "expected_intent": "lien_he"
+    },
+    {
+        "question": "Thông tin về lớp 24CT2",
+        "expected_intent": "lop_24ct2"
+    },
+    {
+        "question": "Lớp 24ct2 học chuyên ngành gì",
+        "expected_intent": "lop_24ct2"
+    },
+    {
+        "question": "Sinh viên 24ct2 khoa cntt",
+        "expected_intent": "lop_24ct2"
+    },
+    {
+        "question": "CNPM DAU lớp 24ct2",
+        "expected_intent": "lop_24ct2"
+    },
+    {
+        "question": "Thời tiết hôm nay ở Đà Nẵng thế nào",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Giá Bitcoin hôm nay bao nhiêu đô",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Giá vàng hôm nay tăng hay giảm",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Cho mình công thức nấu món phở bò",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Viết giúp tôi bài văn cảm nghĩ về mùa thu",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Tôi bị đau đầu thì uống thuốc gì",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Luật hôn nhân gia đình quy định thế nào",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Ai đang là tổng thống Mỹ hiện nay",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Kể cho tôi một câu chuyện cười",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Hôm nay ăn gì ngon ở Đà Nẵng",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Mua bán coin ở sàn nào uy tín",
+        "expected_intent": "out_of_scope"
+    },
+    {
+        "question": "Soi cầu xổ số miền trung chiều nay",
+        "expected_intent": "out_of_scope"
+    }
+]

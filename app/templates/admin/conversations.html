@@ -1,0 +1,100 @@
+﻿{% extends "base.html" %}
+{% block title %}Nhật ký Hội thoại & Logs - StudyBot Admin{% endblock %}
+
+{% block content %}
+<div class="app-layout admin-layout">
+    <aside class="app-sidebar admin-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h3>Admin Panel</h3>
+                <small>StudyBot Management</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="menu-item">
+                <span class="icon">📊</span> Tổng quan Dashboard
+            </a>
+            <a href="{{ url_for('main.admin_students') }}" class="menu-item">
+                <span class="icon">👥</span> Quản lý Sinh viên
+            </a>
+            <a href="{{ url_for('main.admin_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Danh mục Tài liệu
+            </a>
+            <a href="{{ url_for('main.admin_knowledge') }}" class="menu-item">
+                <span class="icon">💡</span> Quản lý Tri thức
+            </a>
+            <a href="{{ url_for('main.admin_conversations') }}" class="menu-item active">
+                <span class="icon">💬</span> Nhật ký Hội thoại & Logs
+            </a>
+        </nav>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍💼</div>
+            <div class="user-info">
+                <strong>{{ user.username }}</strong>
+                <small>Quản trị viên</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header flex-between">
+            <div>
+                <h2>💬 Nhật ký Hội thoại & Giám sát Logs</h2>
+                <p>Theo dõi toàn bộ câu hỏi sinh viên, phản hồi bot, intent dự đoán và đánh giá phản hồi</p>
+            </div>
+        </header>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Thời gian</th>
+                        <th style="width: 13%;">Sinh viên</th>
+                        <th style="width: 25%;">Câu hỏi của SV</th>
+                        <th style="width: 25%;">Phản hồi từ Bot</th>
+                        <th style="width: 10%;">Intent</th>
+                        <th style="width: 8%;">Độ tin cậy</th>
+                        <th style="width: 7%;">Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in chats %}
+                    <tr>
+                        <td><small class="text-muted">{{ c.created_at.strftime('%d/%m/%Y %H:%M') if c.created_at else '-' }}</small></td>
+                        <td>
+                            <strong>{{ c.user.username if c.user else 'N/A' }}</strong>
+                            {% if c.user and c.user.student_code %}
+                            <br><small class="text-muted">{{ c.user.student_code }}</small>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ c.message }}</strong></td>
+                        <td><div style="max-height: 70px; overflow-y: auto; font-size: 0.88rem;">{{ c.response }}</div></td>
+                        <td><span class="badge-intent">{{ c.intent or '-' }}</span></td>
+                        <td>
+                            {% if c.confidence %}
+                            <span class="badge-confidence {% if c.confidence >= 0.75 %}high{% elif c.confidence >= 0.50 %}med{% else %}low{% endif %}">
+                                {{ (c.confidence * 100)|round(1) }}%
+                            </span>
+                            {% else %}-{% endif %}
+                        </td>
+                        <td>
+                            {% if c.feedback %}
+                            <span class="fb-tag fb-{{ c.feedback.rating }}">
+                                {{ '👍' if c.feedback.rating == 'helpful' else '👎' }}
+                            </span>
+                            {% else %}
+                            <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+{% endblock %}

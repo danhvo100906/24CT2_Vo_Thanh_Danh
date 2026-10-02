@@ -1,25 +1,91 @@
 {% extends "base.html" %}
-{% block title %}Lịch sử chat{% endblock %}
+{% block title %}Lịch sử hỏi đáp - StudyBot{% endblock %}
 
 {% block content %}
-<div class="user-layout">
-    <nav class="sidebar">
-        <h3>StudyBot</h3>
-        <a href="{{ url_for('main.dashboard') }}">Trò chuyện</a>
-        <a href="{{ url_for('main.chat_history') }}">Lịch sử chat</a>
-        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
-    </nav>
-
-    <main class="content">
-        <h2>Lịch sử trò chuyện</h2>
-        {% for h in history %}
-        <div class="history-item">
-            <p><strong>Bạn:</strong> {{ h.message }}</p>
-            <p><strong>StudyBot:</strong> {{ h.response }}</p>
-            <small>{{ h.created_at }}</small>
+<div class="app-layout">
+    <aside class="app-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🎓</div>
+            <div class="brand-text">
+                <h3>StudyBot</h3>
+                <small>Trợ lý Sinh viên</small>
+            </div>
         </div>
-        <hr>
-        {% endfor %}
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.dashboard') }}" class="menu-item">
+                <span class="icon">💬</span> Trò chuyện AI
+            </a>
+            <a href="{{ url_for('main.user_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Tài liệu học tập
+            </a>
+            <a href="{{ url_for('main.user_info') }}" class="menu-item">
+                <span class="icon">📋</span> Tra cứu thông tin
+            </a>
+            <a href="{{ url_for('main.chat_history') }}" class="menu-item active">
+                <span class="icon">📜</span> Lịch sử hỏi đáp
+            </a>
+            <a href="{{ url_for('auth.change_password') }}" class="menu-item">
+                <span class="icon">🔑</span> Đổi mật khẩu
+            </a>
+        </nav>
+
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍🎓</div>
+            <div class="user-info">
+                <strong>{{ user.full_name or user.username }}</strong>
+                <small>{{ user.student_code or 'Sinh viên' }}</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header">
+            <div>
+                <h2>📜 Lịch sử Trò chuyện & Hỏi đáp</h2>
+                <p>Xem lại các câu hỏi đã đặt và phản hồi từ StudyBot</p>
+            </div>
+        </header>
+
+        <div class="history-container">
+            {% if messages %}
+                <div class="history-list">
+                    {% for m in messages %}
+                    <div class="history-item">
+                        <div class="history-meta">
+                            <span class="time-badge">🕒 {{ m.created_at.strftime('%d/%m/%Y %H:%M') if m.created_at else 'Gần đây' }}</span>
+                            {% if m.intent %}
+                            <span class="intent-badge">🎯 {{ m.intent }}</span>
+                            {% endif %}
+                            {% if m.confidence %}
+                            <span class="confidence-badge">Độ tin cậy: {{ (m.confidence * 100)|round(1) }}%</span>
+                            {% endif %}
+                            {% if m.feedback %}
+                            <span class="fb-badge fb-{{ m.feedback.rating }}">
+                                {{ '👍 Hữu ích' if m.feedback.rating == 'helpful' else '👎 Chưa rõ' }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="history-question">
+                            <strong>👨‍🎓 Câu hỏi:</strong> {{ m.message }}
+                        </div>
+
+                        <div class="history-answer">
+                            <strong>🤖 StudyBot:</strong>
+                            <div class="answer-content" style="white-space: pre-line;">{{ m.response }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Bạn chưa có cuộc trò chuyện nào. Hãy vào mục <a href="{{ url_for('main.dashboard') }}">Trò chuyện AI</a> để bắt đầu nhé!</p>
+                </div>
+            {% endif %}
+        </div>
     </main>
 </div>
 {% endblock %}

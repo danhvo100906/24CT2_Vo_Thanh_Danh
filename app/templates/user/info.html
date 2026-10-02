@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Tra cứu thông tin - StudyBot{% endblock %}
+
+{% block content %}
+<div class="app-layout">
+    <aside class="app-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🎓</div>
+            <div class="brand-text">
+                <h3>StudyBot</h3>
+                <small>Trợ lý Sinh viên</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.dashboard') }}" class="menu-item">
+                <span class="icon">💬</span> Trò chuyện AI
+            </a>
+            <a href="{{ url_for('main.user_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Tài liệu học tập
+            </a>
+            <a href="{{ url_for('main.user_info') }}" class="menu-item active">
+                <span class="icon">📋</span> Tra cứu thông tin
+            </a>
+            <a href="{{ url_for('main.chat_history') }}" class="menu-item">
+                <span class="icon">📜</span> Lịch sử hỏi đáp
+            </a>
+            <a href="{{ url_for('auth.change_password') }}" class="menu-item">
+                <span class="icon">🔑</span> Đổi mật khẩu
+            </a>
+        </nav>
+
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍🎓</div>
+            <div class="user-info">
+                <strong>{{ user.full_name or user.username }}</strong>
+                <small>{{ user.student_code or 'Sinh viên' }}</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header">
+            <div>
+                <h2>📋 Sổ tay Tri thức Sinh viên</h2>
+                <p>Thông tin chính thống về Học phí, Quy chế tín chỉ, Thủ tục hành chính & Danh bạ liên hệ</p>
+            </div>
+        </header>
+
+        <!-- Category Tabs -->
+        <div class="tab-nav">
+            <a href="{{ url_for('main.user_info', category='all') }}" class="tab-btn {% if active_cat == 'all' %}active{% endif %}">Tất cả</a>
+            <a href="{{ url_for('main.user_info', category='tuition') }}" class="tab-btn {% if active_cat == 'tuition' %}active{% endif %}">💰 Học phí & Tín chỉ</a>
+            <a href="{{ url_for('main.user_info', category='regulations') }}" class="tab-btn {% if active_cat == 'regulations' %}active{% endif %}">🎓 Quy chế & GPA</a>
+            <a href="{{ url_for('main.user_info', category='procedures') }}" class="tab-btn {% if active_cat == 'procedures' %}active{% endif %}">📄 Thủ tục hành chính</a>
+            <a href="{{ url_for('main.user_info', category='contacts') }}" class="tab-btn {% if active_cat == 'contacts' %}active{% endif %}">📞 Danh bạ phòng ban</a>
+        </div>
+
+        <div class="info-items-list">
+            {% if items %}
+                {% for item in items %}
+                <div class="info-item-card">
+                    <div class="item-header">
+                        <span class="category-tag tag-{{ item.category }}">{{ item.category|upper }}</span>
+                        <h3>{{ item.title }}</h3>
+                    </div>
+                    <div class="item-body">
+                        <p style="white-space: pre-line;">{{ item.content }}</p>
+                    </div>
+                    {% if item.source %}
+                    <div class="item-footer">
+                        <small>📌 Nguồn: <em>{{ item.source }}</em></small>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>Chưa có mục thông tin nào trong danh mục này.</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</div>
+{% endblock %}

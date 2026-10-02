@@ -1,0 +1,145 @@
+﻿{% extends "base.html" %}
+{% block title %}Quản lý Tài liệu - StudyBot Admin{% endblock %}
+
+{% block content %}
+<div class="app-layout admin-layout">
+    <aside class="app-sidebar admin-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h3>Admin Panel</h3>
+                <small>StudyBot Management</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="menu-item">
+                <span class="icon">📊</span> Tổng quan Dashboard
+            </a>
+            <a href="{{ url_for('main.admin_students') }}" class="menu-item">
+                <span class="icon">👥</span> Quản lý Sinh viên
+            </a>
+            <a href="{{ url_for('main.admin_materials') }}" class="menu-item active">
+                <span class="icon">📚</span> Danh mục Tài liệu
+            </a>
+            <a href="{{ url_for('main.admin_knowledge') }}" class="menu-item">
+                <span class="icon">💡</span> Quản lý Tri thức
+            </a>
+            <a href="{{ url_for('main.admin_conversations') }}" class="menu-item">
+                <span class="icon">💬</span> Nhật ký Hội thoại & Logs
+            </a>
+        </nav>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍💼</div>
+            <div class="user-info">
+                <strong>{{ user.username }}</strong>
+                <small>Quản trị viên</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header flex-between">
+            <div>
+                <h2>📚 Quản lý Danh mục Tài liệu Học tập</h2>
+                <p>Cập nhật giáo trình, slide bài giảng, link đề thi mẫu cho sinh viên</p>
+            </div>
+            <button type="button" class="btn-primary" onclick="document.getElementById('add-mat-modal').style.display='flex'">
+                ➕ Thêm Tài liệu mới
+            </button>
+        </header>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">Mã môn</th>
+                        <th style="width: 25%;">Tiêu đề tài liệu</th>
+                        <th style="width: 20%;">Giáo trình / Sách</th>
+                        <th style="width: 20%;">Liên kết trực tuyến</th>
+                        <th style="width: 12%;">Trạng thái</th>
+                        <th style="width: 13%;">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in materials %}
+                    <tr>
+                        <td><strong>{{ m.subject_code }}</strong></td>
+                        <td>{{ m.title }}</td>
+                        <td><small>{{ m.reference_book or '-' }}</small></td>
+                        <td>
+                            <div class="link-tags">
+                                {% if m.syllabus_url %}<a href="{{ m.syllabus_url }}" target="_blank" class="badge-pdf">PDF</a>{% endif %}
+                                {% if m.slides_url %}<a href="{{ m.slides_url }}" target="_blank" class="badge-slide">Slide</a>{% endif %}
+                                {% if m.exam_url %}<a href="{{ m.exam_url }}" target="_blank" class="badge-exam">Đề thi</a>{% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            {% if m.status == 'active' %}
+                            <span class="status-tag active">Hiển thị</span>
+                            {% else %}
+                            <span class="status-tag inactive">Ẩn</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <form action="{{ url_for('main.admin_toggle_material', id=m.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-sm {% if m.status == 'active' %}btn-warning{% else %}btn-success{% endif %}">
+                                        {{ 'Ẩn' if m.status == 'active' else 'Hiện' }}
+                                    </button>
+                                </form>
+                                <form action="{{ url_for('main.admin_delete_material', id=m.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa tài liệu này?');">
+                                    <button type="submit" class="btn-sm btn-danger">🗑️</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<!-- Modal Thêm Tài Liệu -->
+<div id="add-mat-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>➕ Thêm Tài liệu Học phần Mới</h3>
+            <button type="button" class="modal-close" onclick="document.getElementById('add-mat-modal').style.display='none'">&times;</button>
+        </div>
+        <form method="POST" action="{{ url_for('main.admin_add_material') }}">
+            <div class="form-group">
+                <label>Mã môn học (Ví dụ: CNPM, PYTHON, CSDL):</label>
+                <input type="text" name="subject_code" placeholder="Mã môn học..." required>
+            </div>
+            <div class="form-group">
+                <label>Tiêu đề tài liệu:</label>
+                <input type="text" name="title" placeholder="Ví dụ: Giáo trình & Slide bài giảng CNPM" required>
+            </div>
+            <div class="form-group">
+                <label>Sách / Giáo trình tham khảo:</label>
+                <input type="text" name="reference_book" placeholder="Tên tác giả / Nhà xuất bản...">
+            </div>
+            <div class="form-group">
+                <label>URL Giáo trình PDF:</label>
+                <input type="url" name="syllabus_url" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>URL Thư mục Slide Drive:</label>
+                <input type="url" name="slides_url" placeholder="https://drive.google.com/...">
+            </div>
+            <div class="form-group">
+                <label>URL Đề thi & Ôn tập PDF:</label>
+                <input type="url" name="exam_url" placeholder="https://...">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="document.getElementById('add-mat-modal').style.display='none'">Hủy</button>
+                <button type="submit" class="btn-primary">Lưu tài liệu</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

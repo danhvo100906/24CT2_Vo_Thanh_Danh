@@ -5,9 +5,11 @@
 <div class="admin-layout">
     <nav class="sidebar">
         <h3>Admin Panel</h3>
-        <a href="{{ url_for('main.admin_dashboard') }}">Tổng quan</a>
-        <a href="{{ url_for('main.admin_users') }}">Quản lý người dùng</a>
-        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+        <a href="{{ url_for('main.admin_dashboard') }}">📊 Tổng quan</a>
+        <a href="{{ url_for('main.admin_users') }}" style="font-weight: bold; color: #60a5fa;">👥 Quản lý người dùng</a>
+        <a href="{{ url_for('main.admin_conversations') }}">💬 Giám sát hội thoại</a>
+        <a href="{{ url_for('main.admin_materials') }}">📚 Danh mục tài liệu</a>
+        <a href="{{ url_for('auth.logout') }}">🚪 Đăng xuất</a>
     </nav>
 
     <main class="content">

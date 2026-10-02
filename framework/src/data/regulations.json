@@ -1,0 +1,26 @@
+[
+    {
+        "id": "REG01",
+        "title": "Thang điểm và Quy đổi điểm chữ sang hệ 4",
+        "category": "Quy chế đào tạo",
+        "content": "Điểm A (8.5-10.0) -> 4.0; Điểm B (7.0-8.4) -> 3.0; Điểm C (5.5-6.9) -> 2.0; Điểm D (4.0-5.4) -> 1.0; Điểm F (<4.0) -> 0.0 (phải học lại).",
+        "source": "Quy chế đào tạo đại học chính quy theo hệ thống tín chỉ",
+        "updated_at": "2024-08-15"
+    },
+    {
+        "id": "REG02",
+        "title": "Quy định Cảnh báo học vụ và Buộc thôi học",
+        "category": "Quy chế đào tạo",
+        "content": "Cảnh báo học vụ khi CPA < 1.20 (năm 1), < 1.40 (năm 2), < 1.60 (năm 3 trở đi). Sinh viên bị cảnh báo học vụ 3 lần liên tiếp sẽ bị buộc thôi học.",
+        "source": "Quy chế đào tạo đại học chính quy theo hệ thống tín chỉ",
+        "updated_at": "2024-08-15"
+    },
+    {
+        "id": "REG03",
+        "title": "Tiêu chuẩn xét Học bổng Khuyến khích học tập",
+        "category": "Học bổng & Khen thưởng",
+        "content": "Xuất sắc: GPA >= 3.60 & ĐRL >= 90; Giỏi: GPA >= 3.20 & ĐRL >= 80; Khá: GPA >= 2.50 & ĐRL >= 70. Điều kiện: Tối thiểu 15 tín chỉ trong kỳ và không có điểm F.",
+        "source": "Quy định xét cấp học bổng khuyến khích học tập sinh viên",
+        "updated_at": "2024-08-15"
+    }
+]

@@ -1,0 +1,147 @@
+DATABASE: instance/studybot.db
+
+=== SQLITE MASTER (TABLES & INDEXES) ===
+('index', 'sqlite_autoindex_subjects_1', 'subjects', None)
+('index', 'sqlite_autoindex_users_1', 'users', None)
+('index', 'sqlite_autoindex_users_2', 'users', None)
+('table', 'chat_messages', 'chat_messages', 'CREATE TABLE chat_messages (\n\tid INTEGER NOT NULL, \n\tuser_id INTEGER NOT NULL, \n\tmessage TEXT NOT NULL, \n\tresponse TEXT NOT NULL, \n\tintent VARCHAR(80), \n\tconfidence FLOAT, \n\tcreated_at DATETIME, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(user_id) REFERENCES users (id)\n)')
+('table', 'feedbacks', 'feedbacks', 'CREATE TABLE feedbacks (\n\tid INTEGER NOT NULL, \n\tmessage_id INTEGER NOT NULL, \n\tuser_id INTEGER NOT NULL, \n\trating VARCHAR(20) NOT NULL, \n\tcomment TEXT, \n\tcreated_at DATETIME, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(message_id) REFERENCES chat_messages (id), \n\tFOREIGN KEY(user_id) REFERENCES users (id)\n)')
+('table', 'knowledge_items', 'knowledge_items', 'CREATE TABLE knowledge_items (\n\tid INTEGER NOT NULL, \n\tcategory VARCHAR(50) NOT NULL, \n\ttitle VARCHAR(200) NOT NULL, \n\tcontent TEXT NOT NULL, \n\tsource VARCHAR(255), \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id)\n)')
+('table', 'materials', 'materials', 'CREATE TABLE materials (\n\tid INTEGER NOT NULL, \n\tsubject_code VARCHAR(20) NOT NULL, \n\ttitle VARCHAR(150) NOT NULL, \n\ttype VARCHAR(50), \n\tsyllabus_url VARCHAR(300), \n\tslides_url VARCHAR(300), \n\texam_url VARCHAR(300), \n\treference_book VARCHAR(255), \n\tstatus VARCHAR(20), \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id)\n)')
+('table', 'subjects', 'subjects', 'CREATE TABLE subjects (\n\tid INTEGER NOT NULL, \n\tcode VARCHAR(20) NOT NULL, \n\tname VARCHAR(120) NOT NULL, \n\tcredits INTEGER, \n\tdescription TEXT, \n\tcreated_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE (code)\n)')
+('table', 'users', 'users', 'CREATE TABLE users (\n\tid INTEGER NOT NULL, \n\tstudent_code VARCHAR(30), \n\tusername VARCHAR(80) NOT NULL, \n\tfull_name VARCHAR(120), \n\tpassword_hash VARCHAR(255) NOT NULL, \n\trole VARCHAR(20) NOT NULL, \n\tstatus VARCHAR(20) NOT NULL, \n\tcreated_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE (student_code), \n\tUNIQUE (username)\n)')
+
+=== PRAGMA table_info('users') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'student_code', 'VARCHAR(30)', 0, None, 0)
+(2, 'username', 'VARCHAR(80)', 1, None, 0)
+(3, 'full_name', 'VARCHAR(120)', 0, None, 0)
+(4, 'password_hash', 'VARCHAR(255)', 1, None, 0)
+(5, 'role', 'VARCHAR(20)', 1, None, 0)
+(6, 'status', 'VARCHAR(20)', 1, None, 0)
+(7, 'created_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('users') ===
+
+=== PRAGMA index_list('users') ===
+(0, 'sqlite_autoindex_users_2', 1, 'u', 0)
+--- PRAGMA index_info('sqlite_autoindex_users_2') ---
+    (0, 2, 'username')
+(1, 'sqlite_autoindex_users_1', 1, 'u', 0)
+--- PRAGMA index_info('sqlite_autoindex_users_1') ---
+    (0, 1, 'student_code')
+
+=== PRAGMA table_info('subjects') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'code', 'VARCHAR(20)', 1, None, 0)
+(2, 'name', 'VARCHAR(120)', 1, None, 0)
+(3, 'credits', 'INTEGER', 0, None, 0)
+(4, 'description', 'TEXT', 0, None, 0)
+(5, 'created_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('subjects') ===
+
+=== PRAGMA index_list('subjects') ===
+(0, 'sqlite_autoindex_subjects_1', 1, 'u', 0)
+--- PRAGMA index_info('sqlite_autoindex_subjects_1') ---
+    (0, 1, 'code')
+
+=== PRAGMA table_info('materials') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'subject_code', 'VARCHAR(20)', 1, None, 0)
+(2, 'title', 'VARCHAR(150)', 1, None, 0)
+(3, 'type', 'VARCHAR(50)', 0, None, 0)
+(4, 'syllabus_url', 'VARCHAR(300)', 0, None, 0)
+(5, 'slides_url', 'VARCHAR(300)', 0, None, 0)
+(6, 'exam_url', 'VARCHAR(300)', 0, None, 0)
+(7, 'reference_book', 'VARCHAR(255)', 0, None, 0)
+(8, 'status', 'VARCHAR(20)', 0, None, 0)
+(9, 'updated_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('materials') ===
+
+=== PRAGMA index_list('materials') ===
+
+=== PRAGMA table_info('knowledge_items') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'category', 'VARCHAR(50)', 1, None, 0)
+(2, 'title', 'VARCHAR(200)', 1, None, 0)
+(3, 'content', 'TEXT', 1, None, 0)
+(4, 'source', 'VARCHAR(255)', 0, None, 0)
+(5, 'updated_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('knowledge_items') ===
+
+=== PRAGMA index_list('knowledge_items') ===
+
+=== PRAGMA table_info('chat_messages') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'user_id', 'INTEGER', 1, None, 0)
+(2, 'message', 'TEXT', 1, None, 0)
+(3, 'response', 'TEXT', 1, None, 0)
+(4, 'intent', 'VARCHAR(80)', 0, None, 0)
+(5, 'confidence', 'FLOAT', 0, None, 0)
+(6, 'created_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('chat_messages') ===
+(0, 0, 'users', 'user_id', 'id', 'NO ACTION', 'NO ACTION', 'NONE')
+
+=== PRAGMA index_list('chat_messages') ===
+
+=== PRAGMA table_info('feedbacks') ===
+(0, 'id', 'INTEGER', 1, None, 1)
+(1, 'message_id', 'INTEGER', 1, None, 0)
+(2, 'user_id', 'INTEGER', 1, None, 0)
+(3, 'rating', 'VARCHAR(20)', 1, None, 0)
+(4, 'comment', 'TEXT', 0, None, 0)
+(5, 'created_at', 'DATETIME', 0, None, 0)
+
+=== PRAGMA foreign_key_list('feedbacks') ===
+(0, 0, 'users', 'user_id', 'id', 'NO ACTION', 'NO ACTION', 'NONE')
+(1, 0, 'chat_messages', 'message_id', 'id', 'NO ACTION', 'NO ACTION', 'NONE')
+
+=== PRAGMA index_list('feedbacks') ===
+
+=== USER COUNTS ===
+Total users: 904
+
+Role Counts:
+('admin', 1)
+('student', 903)
+
+=== DUPLICATE CHECK ===
+Duplicate valid/assigned student codes = 0
+
+=== STUDENT ACCOUNT EXACT VERIFICATION ===
+Cohort 24:
+Expected count: 300
+Actual count: 300
+Distinct count: 300
+Missing: 0
+Duplicate: 0
+Cohort 25:
+Expected count: 300
+Actual count: 300
+Distinct count: 300
+Missing: 0
+Duplicate: 0
+Cohort 26:
+Expected count: 300
+Actual count: 300
+Distinct count: 300
+Missing: 0
+Duplicate: 0
+
+=== EXACT SET CHECK (ALL COHORTS) ===
+Expected valid student codes = 900
+Actual valid student codes = 900
+Missing = 0
+Duplicate = 0
+Invalid/Extra = 3
+
+=== THREE EXTRA STUDENT ACCOUNTS ===
+Extra student rows = 3
+Row output (id, student_code, username, full_name, role, status):
+2 | 24CT2001 | 24ct2001 | Võ Thành Danh | student | active
+3 | 24CT2002 | 24ct2002 | Nguyễn Văn An | student | active
+4 | 24CT2003 | 24ct2003 | Trần Thị Bình | student | active

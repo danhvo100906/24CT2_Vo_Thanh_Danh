@@ -1,0 +1,134 @@
+[
+    {
+        "id": "CNPM01",
+        "name": "Công nghệ phần mềm",
+        "code": "CNPM",
+        "credits": 3,
+        "keywords": [
+            "công nghệ phần mềm",
+            "cnpm",
+            "software engineering",
+            "software",
+            "agile",
+            "scrum",
+            "uml",
+            "srs"
+        ],
+        "description": "Cung cấp quy trình phát triển phần mềm chuẩn: Waterfall, Agile/Scrum, phân tích yêu cầu SRS, thiết kế sơ đồ UML và kiểm thử phần mềm.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-cong-nghe-phan-mem-dau.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-cnpm-slides-24ct",
+        "exam_sample": "https://dau.edu.vn/elib/de-thi-mau-cnpm-cac-nam.pdf",
+        "reference_book": "Giáo trình Công nghệ Phần mềm - PGS.TS Đỗ Văn Nhơn & Ian Sommerville"
+    },
+    {
+        "id": "PY02",
+        "name": "Lập trình Python & AI",
+        "code": "PYTHON",
+        "credits": 3,
+        "keywords": [
+            "python",
+            "lập trình python",
+            "ai",
+            "trí tuệ nhân tạo",
+            "machine learning",
+            "pytorch",
+            "học máy",
+            "numpy",
+            "pandas"
+        ],
+        "description": "Lập trình Python nâng cao, thư viện NumPy, Pandas, xử lý dữ liệu và xây dựng mạng nơ-ron cơ bản với PyTorch.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-python-ai-dau.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-python-pytorch-slides",
+        "exam_sample": "https://dau.edu.vn/elib/bai-tap-lon-python-de-thi.pdf",
+        "reference_book": "Python for Data Analysis - Wes McKinney / Hands-On ML - Aurélien Géron"
+    },
+    {
+        "id": "DB03",
+        "name": "Hệ quản trị Cơ sở dữ liệu",
+        "code": "CSDL",
+        "credits": 3,
+        "keywords": [
+            "cơ sở dữ liệu",
+            "csdl",
+            "database",
+            "sql",
+            "hệ quản trị csdl",
+            "mysql",
+            "postgresql",
+            "truy vấn",
+            "chuẩn hóa"
+        ],
+        "description": "Mô hình quan hệ (E-R), chuẩn hóa CSDL (1NF, 2NF, 3NF, BCNF), lập trình thủ tục Store Procedure và tối ưu hóa truy vấn SQL.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-he-quan-tri-csdl.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-csdl-sql-slides",
+        "exam_sample": "https://dau.edu.vn/elib/ngan-hang-de-thi-csdl-dau.pdf",
+        "reference_book": "Database System Concepts - Silberschatz, Korth, Sudarshan"
+    },
+    {
+        "id": "NET04",
+        "name": "Mạng máy tính & Truyền thông",
+        "code": "MMT",
+        "credits": 3,
+        "keywords": [
+            "mạng máy tính",
+            "mmt",
+            "network",
+            "networking",
+            "cisco",
+            "tcp/ip",
+            "osi",
+            "địa chỉ ip",
+            "subnet"
+        ],
+        "description": "Kiến trúc mô hình OSI 7 tầng, TCP/IP, cấu hình định tuyến Router/Switch, chia subnet IP và bảo mật mạng cơ bản.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-mang-may-tinh-dau.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-mang-may-tinh-slides",
+        "exam_sample": "https://dau.edu.vn/elib/de-thi-thuc-hanh-mang-may-tinh.pdf",
+        "reference_book": "Computer Networking: A Top-Down Approach - Kurose & Ross"
+    },
+    {
+        "id": "DSA05",
+        "name": "Cấu trúc dữ liệu và Giải thuật",
+        "code": "CTDL",
+        "credits": 4,
+        "keywords": [
+            "cấu trúc dữ liệu",
+            "giải thuật",
+            "ctdl",
+            "thuật toán",
+            "dsa",
+            "cây nhị phân",
+            "đồ thị",
+            "sắp xếp",
+            "quicksort"
+        ],
+        "description": "Các cấu trúc dữ liệu nền tảng: Danh sách liên kết, Stack, Queue, Cây nhị phân tìm kiếm, Đồ thị và các thuật toán tìm kiếm/sắp xếp.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-ctdl-giai-thuat.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-dsa-slides",
+        "exam_sample": "https://dau.edu.vn/elib/de-thi-ctdl-cac-nam-truoc.pdf",
+        "reference_book": "Introduction to Algorithms (CLRS) - Cormen, Leiserson, Rivest, Stein"
+    },
+    {
+        "id": "WEB06",
+        "name": "Phát triển Ứng dụng Web",
+        "code": "WEB",
+        "credits": 3,
+        "keywords": [
+            "lập trình web",
+            "web",
+            "html",
+            "css",
+            "javascript",
+            "flask",
+            "django",
+            "frontend",
+            "backend",
+            "rest api"
+        ],
+        "description": "Phát triển web Fullstack với Frontend (HTML5, CSS3, JavaScript) và Backend (Python Flask / REST API), kết nối CSDL và deploy.",
+        "syllabus": "https://dau.edu.vn/elib/giao-trinh-lap-trinh-web-flask.pdf",
+        "slides": "https://drive.google.com/drive/folders/dau-web-flask-slides",
+        "exam_sample": "https://dau.edu.vn/elib/huong-dan-do-an-web-mau.pdf",
+        "reference_book": "Flask Web Development - Miguel Grinberg"
+    }
+]

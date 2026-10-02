@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Tài liệu học tập - StudyBot{% endblock %}
+
+{% block content %}
+<div class="app-layout">
+    <aside class="app-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🎓</div>
+            <div class="brand-text">
+                <h3>StudyBot</h3>
+                <small>Trợ lý Sinh viên</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.dashboard') }}" class="menu-item">
+                <span class="icon">💬</span> Trò chuyện AI
+            </a>
+            <a href="{{ url_for('main.user_materials') }}" class="menu-item active">
+                <span class="icon">📚</span> Tài liệu học tập
+            </a>
+            <a href="{{ url_for('main.user_info') }}" class="menu-item">
+                <span class="icon">📋</span> Tra cứu thông tin
+            </a>
+            <a href="{{ url_for('main.chat_history') }}" class="menu-item">
+                <span class="icon">📜</span> Lịch sử hỏi đáp
+            </a>
+            <a href="{{ url_for('auth.change_password') }}" class="menu-item">
+                <span class="icon">🔑</span> Đổi mật khẩu
+            </a>
+        </nav>
+
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍🎓</div>
+            <div class="user-info">
+                <strong>{{ user.full_name or user.username }}</strong>
+                <small>{{ user.student_code or 'Sinh viên' }}</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header">
+            <div>
+                <h2>📚 Danh mục Tài liệu Học tập & Giáo trình</h2>
+                <p>Kho học liệu số chính thức các học phần ngành Công nghệ Thông tin</p>
+            </div>
+        </header>
+
+        <div class="filter-bar">
+            <form method="GET" action="{{ url_for('main.user_materials') }}" class="search-form">
+                <input type="text" name="q" value="{{ query }}" placeholder="Tìm kiếm theo tên môn, mã môn (CNPM, CSDL, Python...)" class="search-input">
+                <button type="submit" class="btn-primary">Tìm kiếm</button>
+                {% if query %}
+                <a href="{{ url_for('main.user_materials') }}" class="btn-secondary">Xóa tìm kiếm</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="cards-grid">
+            {% if materials %}
+                {% for m in materials %}
+                {% set sub = subjects.get(m.subject_code) %}
+                <div class="material-card">
+                    <div class="card-badge">{{ m.subject_code }}</div>
+                    <h3 class="card-title">{{ sub.name if sub else m.title }}</h3>
+                    <p class="card-meta">
+                        <span>📊 Số tín chỉ: <strong>{{ sub.credits if sub else 3 }} TC</strong></span>
+                    </p>
+                    <p class="card-desc">{{ sub.description if sub and sub.description else m.title }}</p>
+                    
+                    {% if m.reference_book %}
+                    <div class="card-ref">
+                        <small>📖 Giáo trình tham khảo: <em>{{ m.reference_book }}</em></small>
+                    </div>
+                    {% endif %}
+
+                    <div class="card-actions">
+                        {% if m.syllabus_url %}
+                        <a href="{{ m.syllabus_url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-pdf">📥 Giáo trình PDF</a>
+                        {% endif %}
+                        {% if m.slides_url %}
+                        <a href="{{ m.slides_url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-slide">📂 Slide bài giảng</a>
+                        {% endif %}
+                        {% if m.exam_url %}
+                        <a href="{{ m.exam_url }}" target="_blank" rel="noopener noreferrer" class="btn-action btn-exam">📝 Đề thi & Ôn tập</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>🔍 Không tìm thấy tài liệu phù hợp với từ khóa "<strong>{{ query }}</strong>".</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</div>
+{% endblock %}

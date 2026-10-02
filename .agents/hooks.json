@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "purpose": "StudyBot safety gates. Keep automation conservative.",
+  "hooks": {
+    "pre_change": [
+      "Read AGENTS.md and relevant PROJECT_SPEC documents.",
+      "Check task scope and approval gates."
+    ],
+    "post_change": [
+      "Run relevant tests.",
+      "Review changed files/diff.",
+      "Do not claim completion if verification failed."
+    ]
+  }
+}

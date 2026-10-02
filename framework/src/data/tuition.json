@@ -1,0 +1,38 @@
+[
+    {
+        "id": "TUI01",
+        "academic_year": "2024-2025",
+        "category": "Đơn giá tín chỉ lý thuyết",
+        "price": 480000,
+        "description": "Áp dụng cho các học phần lý thuyết khối ngành Công nghệ Thông tin.",
+        "source": "Quyết định học phí năm học 2024-2025 - Trường ĐH Kiến trúc Đà Nẵng",
+        "updated_at": "2024-09-01"
+    },
+    {
+        "id": "TUI02",
+        "academic_year": "2024-2025",
+        "category": "Đơn giá tín chỉ thực hành / thí nghiệm",
+        "price": 600000,
+        "description": "Áp dụng cho các học phần thực hành tại phòng máy tính, phòng lab (hệ số 1.25).",
+        "source": "Quyết định học phí năm học 2024-2025 - Trường ĐH Kiến trúc Đà Nẵng",
+        "updated_at": "2024-09-01"
+    },
+    {
+        "id": "TUI03",
+        "academic_year": "2024-2025",
+        "category": "Thời hạn nộp học phí",
+        "price": 0,
+        "description": "Trong vòng 4 tuần đầu tiên kể từ ngày bắt đầu học kỳ chính.",
+        "source": "Thông báo thu học phí Phòng Kế hoạch - Tài chính",
+        "updated_at": "2024-09-01"
+    },
+    {
+        "id": "TUI04",
+        "academic_year": "2024-2025",
+        "category": "Phương thức nộp học phí",
+        "price": 0,
+        "description": "Quét mã VietQR trên Cổng sinh viên hoặc chuyển khoản Vietcombank CN Đà Nẵng, STK: 0041000123456, Cú pháp: [MãSV] [HọTên] Nop hoc phi HK...",
+        "source": "Hướng dẫn nộp học phí qua cổng ngân hàng",
+        "updated_at": "2024-09-01"
+    }
+]

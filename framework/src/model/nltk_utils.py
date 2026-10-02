@@ -1,28 +1,31 @@
+﻿import re
 import numpy as np
-import nltk
-from nltk.stem.porter import PorterStemmer
 
-stemmer = PorterStemmer()
+
+def normalize_vietnamese(text):
+    """Chuẩn hóa ký tự và chữ thường"""
+    if not text:
+        return ""
+    text = text.lower().strip()
+    return text
 
 
 def tokenize(sentence):
-    """Tách câu thành danh sách các từ/token"""
-    return nltk.word_tokenize(sentence)
+    """Tách câu thành các từ/token nhanh bằng biểu thức chính quy"""
+    sentence = normalize_vietnamese(sentence)
+    # Tách các từ tiếng Việt và chữ số
+    tokens = re.findall(r'[a-zA-Z0-9_àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệđìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵ]+', sentence)
+    return tokens
 
 
-def stem(word):
-    """Đưa từ về dạng gốc (ví dụ: organize, organizes -> organ)"""
-    return stemmer.stem(word.lower())
-
-
-def bag_of_words(tokenized_sentence, all_words):
+def bag_of_words(tokenized_sentence, words):
     """
-    Trả về vector bag-of-words:
-    1 nếu từ xuất hiện trong câu, 0 nếu không
+    Trả về mảng bag of words:
+    1 cho mỗi từ xuất hiện trong câu, 0 cho từ còn lại
     """
-    sentence_words = [stem(w) for w in tokenized_sentence]
-    bag = np.zeros(len(all_words), dtype=np.float32)
-    for idx, w in enumerate(all_words):
+    sentence_words = [normalize_vietnamese(w) for w in tokenized_sentence]
+    bag = np.zeros(len(words), dtype=np.float32)
+    for idx, w in enumerate(words):
         if w in sentence_words:
-            bag[idx] = 1
+            bag[idx] = 1.0
     return bag

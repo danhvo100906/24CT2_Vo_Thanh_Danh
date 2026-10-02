@@ -1,61 +1,244 @@
 {% extends "base.html" %}
-{% block title %}Chat{% endblock %}
+{% block title %}StudyBot - Trợ lý Học tập Sinh viên{% endblock %}
 
 {% block content %}
-<div class="user-layout">
-    <nav class="sidebar">
-        <h3>StudyBot</h3>
-        <a href="{{ url_for('main.dashboard') }}">Trò chuyện</a>
-        <a href="{{ url_for('main.chat_history') }}">Lịch sử chat</a>
-        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
-    </nav>
-
-    <main class="content chat-main">
-        <h2>Xin chào, {{ user.username }} 👋</h2>
-
-        <div id="chat-box" class="chat-box">
-            <div class="msg bot">Chào bạn! Mình là StudyBot, hỏi mình bất cứ điều gì về học tập nhé.</div>
+<div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🎓</div>
+            <div class="brand-text">
+                <h3>StudyBot</h3>
+                <small>Trợ lý Sinh viên</small>
+            </div>
         </div>
 
-        <form id="chat-form" class="chat-form">
-            <input type="text" id="chat-input" placeholder="Nhập câu hỏi..." autocomplete="off" required>
-            <button type="submit">Gửi</button>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.dashboard') }}" class="menu-item active">
+                <span class="icon">💬</span> Trò chuyện AI
+            </a>
+            <a href="{{ url_for('main.user_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Tài liệu học tập
+            </a>
+            <a href="{{ url_for('main.user_info') }}" class="menu-item">
+                <span class="icon">📋</span> Tra cứu thông tin
+            </a>
+            <a href="{{ url_for('main.chat_history') }}" class="menu-item">
+                <span class="icon">📜</span> Lịch sử hỏi đáp
+            </a>
+            <a href="{{ url_for('auth.change_password') }}" class="menu-item">
+                <span class="icon">🔑</span> Đổi mật khẩu
+            </a>
+        </nav>
+
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍🎓</div>
+            <div class="user-info">
+                <strong>{{ user.full_name or user.username }}</strong>
+                <small>{{ user.student_code or 'Sinh viên' }}</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="app-main chat-view">
+        <header class="main-header">
+            <div>
+                <h2>Hỏi đáp cùng StudyBot 👋</h2>
+                <p>Hỗ trợ tra cứu tài liệu học tập, kiến thức cơ bản, học phí, quy chế tín chỉ & thủ tục sinh viên</p>
+            </div>
+            <div class="status-indicator">
+                <span class="dot-online"></span> Sẵn sàng phản hồi
+            </div>
+        </header>
+
+        <div id="chat-container" class="chat-container">
+            <!-- Welcome message -->
+            <div class="message-bubble bot-bubble">
+                <div class="bubble-sender">🤖 StudyBot</div>
+                <div class="bubble-content">
+                    Chào bạn <b>{{ user.full_name or user.username }}</b>! Mình có thể hỗ trợ bạn tra cứu các thông tin
+                    sau:
+                    <ul>
+                        <li>📚 <b>Tài liệu & Đề thi:</b> Công nghệ phần mềm, Python & AI, CSDL, Mạng máy tính, CTDL &
+                            Giải thuật, Web.</li>
+                        <li>💰 <b>Học phí & Học bổng:</b> Đơn giá tín chỉ, hạn nộp, hướng dẫn đóng VietQR, điều kiện học
+                            bổng.</li>
+                        <li>🎓 <b>Quy chế tín chỉ:</b> Quy đổi điểm A-F sang hệ 4, cảnh báo học vụ, tính GPA.</li>
+                        <li>📄 <b>Thủ tục sinh viên:</b> Xin giấy xác nhận, hoãn NVQS, làm lại thẻ SV, liên hệ phòng
+                            ban.</li>
+                    </ul>
+                    <i>Bạn có thể bấm vào gợi ý bên dưới hoặc gõ trực tiếp câu hỏi nhé!</i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Chips Suggestions -->
+        <div class="quick-chips-section">
+            <span class="chips-title">💡 Gợi ý nhanh:</span>
+            <div class="chips-list">
+                <button type="button" class="chip" onclick="sendPrompt('Tài liệu môn Công nghệ phần mềm')">📚 Tài liệu
+                    CNPM</button>
+                <button type="button" class="chip" onclick="sendPrompt('Slide và đề thi môn Lập trình Python & AI')">🐍
+                    Python & AI</button>
+                <button type="button" class="chip" onclick="sendPrompt('Tài liệu và đề thi môn Hệ quản trị CSDL')">🗄️
+                    CSDL & SQL</button>
+                <button type="button" class="chip" onclick="sendPrompt('Học phí kỳ này bao nhiêu tiền một tín chỉ?')">💰
+                    Đơn giá tín chỉ</button>
+                <button type="button" class="chip" onclick="sendPrompt('Hạn nộp học phí và cách nộp như thế nào?')">⏰
+                    Hạn & Cách đóng học phí</button>
+                <button type="button" class="chip"
+                    onclick="sendPrompt('Điều kiện nhận học bổng khuyến khích học tập')">🏆 Tiêu chuẩn học bổng</button>
+                <button type="button" class="chip"
+                    onclick="sendPrompt('Quy chế tính điểm GPA thang điểm 4 và cảnh báo học vụ')">🎓 Quy chế &
+                    GPA</button>
+                <button type="button" class="chip" onclick="sendPrompt('Làm sao để xin giấy xác nhận sinh viên?')">📄
+                    Giấy xác nhận SV</button>
+                <button type="button" class="chip"
+                    onclick="sendPrompt('Số điện thoại liên hệ phòng Đào tạo và phòng CTSV')">📞 Liên hệ phòng
+                    ban</button>
+            </div>
+        </div>
+
+        <!-- Input Bar -->
+        <form id="chat-form" class="chat-input-bar">
+            <input type="text" id="user-input"
+                placeholder="Nhập câu hỏi của bạn (Ví dụ: tài liệu cnpm, hạn nộp học phí, quy chế tín chỉ...)"
+                autocomplete="off" required>
+            <button type="submit" id="btn-send" class="btn-send">
+                <span>Gửi</span> 🚀
+            </button>
         </form>
     </main>
 </div>
 
 <script>
-    const chatBox = document.getElementById('chat-box');
+    const chatContainer = document.getElementById('chat-container');
     const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
+    const userInput = document.getElementById('user-input');
+    const btnSend = document.getElementById('btn-send');
 
-    function addMessage(text, sender) {
-        const div = document.createElement('div');
-        div.className = 'msg ' + sender;
-        div.textContent = text;
-        chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight;
+    function renderMarkdown(text) {
+        if (!text) return '';
+        let str = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        // Headings
+        str = str.replace(/^### (.*$)/gim, '<h4>$1</h4>');
+        str = str.replace(/^## (.*$)/gim, '<h3>$1</h3>');
+        // Bold
+        str = str.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Italic
+        str = str.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // Inline code
+        str = str.replace(/`([^`]+)`/g, '<code>$1</code>');
+        // Markdown link [title](url)
+        str = str.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1 ↗</a>');
+        // List items
+        str = str.replace(/^\s*-\s+(.*$)/gim, '<li>$1</li>');
+        str = str.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        // Newlines
+        str = str.replace(/\n/g, '<br>');
+        return str;
     }
 
-    chatForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const message = chatInput.value.trim();
-        if (!message) return;
+    function addMessage(content, sender, messageId = null) {
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${sender}-bubble`;
 
-        addMessage(message, 'user');
-        chatInput.value = '';
+        const senderTag = document.createElement('div');
+        senderTag.className = 'bubble-sender';
+        senderTag.textContent = sender === 'bot' ? '🤖 StudyBot' : '👨‍🎓 Bạn';
+        bubble.appendChild(senderTag);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'bubble-content';
+        if (sender === 'bot') {
+            contentDiv.innerHTML = renderMarkdown(content);
+        } else {
+            contentDiv.textContent = content;
+        }
+        bubble.appendChild(contentDiv);
+
+        if (sender === 'bot' && messageId) {
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.className = 'feedback-actions';
+            feedbackDiv.innerHTML = `
+                <span class="feedback-hint">Câu trả lời có hữu ích không?</span>
+                <button type="button" class="btn-fb fb-up" onclick="sendFeedback(${messageId}, 'helpful', this)" title="Hữu ích">👍 Hữu ích</button>
+                <button type="button" class="btn-fb fb-down" onclick="sendFeedback(${messageId}, 'unhelpful', this)" title="Không hữu ích">👎 Chưa rõ</button>
+            `;
+            bubble.appendChild(feedbackDiv);
+        }
+
+        chatContainer.appendChild(bubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.className = 'typing-indicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span> StudyBot đang soạn câu trả lời...';
+        chatContainer.appendChild(typingDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function removeTyping() {
+        const typing = document.getElementById('typing-indicator');
+        if (typing) typing.remove();
+    }
+
+    async function sendPrompt(text) {
+        if (!text) return;
+        addMessage(text, 'user');
+        userInput.value = '';
+        userInput.disabled = true;
+        btnSend.disabled = true;
+
+        showTyping();
 
         try {
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
+                body: JSON.stringify({ message: text })
             });
             const data = await res.json();
-            addMessage(data.response, 'bot');
+            removeTyping();
+            addMessage(data.response || 'Không có phản hồi từ máy chủ.', 'bot', data.message_id);
         } catch (err) {
-            addMessage('Có lỗi xảy ra, thử lại sau.', 'bot');
+            removeTyping();
+            addMessage('⚠️ Có lỗi xảy ra khi kết nối máy chủ. Vui lòng thử lại!', 'bot');
+        } finally {
+            userInput.disabled = false;
+            btnSend.disabled = false;
+            userInput.focus();
         }
+    }
+
+    async function sendFeedback(messageId, rating, btn) {
+        const parent = btn.parentElement;
+        try {
+            const res = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message_id: messageId, rating: rating })
+            });
+            if (res.ok) {
+                parent.innerHTML = rating === 'helpful'
+                    ? '<span class="fb-thanks">✅ Cảm ơn bạn đã đánh giá hữu ích!</span>'
+                    : '<span class="fb-thanks">📝 Cảm ơn góp ý, StudyBot sẽ cải thiện tốt hơn!</span>';
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = userInput.value.trim();
+        sendPrompt(msg);
     });
 </script>
 {% endblock %}

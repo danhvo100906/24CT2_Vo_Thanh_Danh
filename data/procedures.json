@@ -1,0 +1,32 @@
+[
+    {
+        "id": "PROC01",
+        "procedure_name": "Xin Giấy xác nhận sinh viên (NVQS, Vay vốn, Xin việc)",
+        "requirements": "Thẻ sinh viên / Mã số sinh viên hợp lệ, không trong thời gian bị kỷ luật.",
+        "steps": "1. Đăng ký trực tuyến trên Cổng một cửa sinh viên -> 2. Nhận giấy bản gốc tại Phòng CTSV sau 1-2 ngày làm việc.",
+        "processing_time": "1-2 ngày làm việc",
+        "location": "Phòng Công tác sinh viên (Tầng 1 - Nhà Đa năng)",
+        "source": "Quy trình giải quyết thủ tục một cửa",
+        "updated_at": "2024-08-20"
+    },
+    {
+        "id": "PROC02",
+        "procedure_name": "Cấp lại Thẻ sinh viên bị mất",
+        "requirements": "Đơn xin cấp lại thẻ sinh viên theo mẫu, 01 ảnh 3x4.",
+        "steps": "1. Điền đơn tại Phòng CTSV -> 2. Nộp lệ phí làm thẻ 50.000đ -> 3. Nhận thẻ mới sau 5 ngày làm việc.",
+        "processing_time": "5 ngày làm việc",
+        "location": "Phòng Công tác sinh viên",
+        "source": "Quy định cấp phát thẻ sinh viên",
+        "updated_at": "2024-08-20"
+    },
+    {
+        "id": "PROC03",
+        "procedure_name": "Bảo lưu kết quả học tập / Nghỉ học tạm thời",
+        "requirements": "Đã hoàn thành ít nhất 01 học kỳ, không nợ học phí, có lý do chính đáng (sức khỏe/hoàn cảnh gia đình).",
+        "steps": "1. Nộp đơn xin nghỉ học tạm thời kèm minh chứng về Phòng Quản lý Đào tạo trước học kỳ mới 2 tuần -> 2. Nhận Quyết định bảo lưu từ Ban Giám hiệu.",
+        "processing_time": "3-5 ngày làm việc",
+        "location": "Phòng Quản lý Đào tạo (Tầng 1 - Khu Hiệu bộ)",
+        "source": "Quy chế đào tạo đại học",
+        "updated_at": "2024-08-20"
+    }
+]

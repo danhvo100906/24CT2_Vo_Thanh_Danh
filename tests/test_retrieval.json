@@ -1,0 +1,158 @@
+[
+    {
+        "question": "tài liệu cnpm",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "giáo trình công nghệ phần mềm",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "slide môn software engineering",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "đề thi cnpm các năm trước",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "tài liệu môn lập trình python và ai",
+        "expected_subject": "PYTHON"
+    },
+    {
+        "question": "slide bài giảng pytorch",
+        "expected_subject": "PYTHON"
+    },
+    {
+        "question": "bài tập lớn python ai",
+        "expected_subject": "PYTHON"
+    },
+    {
+        "question": "tài liệu cơ sở dữ liệu",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "giáo trình hệ quản trị csdl sql",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "slide môn database sql",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "đề thi môn csdl",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "tài liệu mạng máy tính",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "slide môn mmt cisco",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "đề thi thực hành mạng máy tính",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "tài liệu cấu trúc dữ liệu và giải thuật",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "slide môn dsa thuật toán",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "đề thi môn ctdl các năm",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "tài liệu lập trình web flask",
+        "expected_subject": "WEB"
+    },
+    {
+        "question": "slide môn phát triển ứng dụng web",
+        "expected_subject": "WEB"
+    },
+    {
+        "question": "đồ án môn web mẫu",
+        "expected_subject": "WEB"
+    },
+    {
+        "question": "môn cnpm có giáo trình gì",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "tìm tài liệu python machine learning",
+        "expected_subject": "PYTHON"
+    },
+    {
+        "question": "chuẩn hóa csdl tài liệu môn nào",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "tài liệu mạng cisco osi",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "tài liệu cây nhị phân đồ thị dsa",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "CNPM",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "CSDL",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "MMT",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "Công nghệ phần mềm",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "Hệ quản trị Cơ sở dữ liệu",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "Cấu trúc dữ liệu và Giải thuật",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "dsa",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "database",
+        "expected_subject": "CSDL"
+    },
+    {
+        "question": "cisco",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "software engineering",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "tai lieu mang may tinh",
+        "expected_subject": "MMT"
+    },
+    {
+        "question": "giao trinh cau truc du lieu",
+        "expected_subject": "CTDL"
+    },
+    {
+        "question": "tai lieu cong nghe phan mem",
+        "expected_subject": "CNPM"
+    },
+    {
+        "question": "tai lieu lap trinh web",
+        "expected_subject": "WEB"
+    }
+]

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Quản lý Sinh viên - StudyBot Admin{% endblock %}
+
+{% block content %}
+<div class="app-layout admin-layout">
+    <aside class="app-sidebar admin-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h3>Admin Panel</h3>
+                <small>StudyBot Management</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="menu-item">
+                <span class="icon">📊</span> Tổng quan Dashboard
+            </a>
+            <a href="{{ url_for('main.admin_students') }}" class="menu-item active">
+                <span class="icon">👥</span> Quản lý Sinh viên
+            </a>
+            <a href="{{ url_for('main.admin_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Danh mục Tài liệu
+            </a>
+            <a href="{{ url_for('main.admin_knowledge') }}" class="menu-item">
+                <span class="icon">💡</span> Quản lý Tri thức
+            </a>
+            <a href="{{ url_for('main.admin_conversations') }}" class="menu-item">
+                <span class="icon">💬</span> Nhật ký Hội thoại & Logs
+            </a>
+        </nav>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍💼</div>
+            <div class="user-info">
+                <strong>{{ user.username }}</strong>
+                <small>Quản trị viên</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header flex-between">
+            <div>
+                <h2>👥 Quản lý Tài khoản Sinh viên</h2>
+                <p>Khởi tạo, cấp mật khẩu và quản lý trạng thái tài khoản sinh viên</p>
+            </div>
+            <button type="button" class="btn-primary" onclick="document.getElementById('add-modal').style.display='flex'">
+                ➕ Thêm Sinh viên mới
+            </button>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="filter-bar">
+            <form method="GET" action="{{ url_for('main.admin_students') }}" class="search-form">
+                <input type="text" name="q" value="{{ query or '' }}" placeholder="Tìm kiếm theo Mã SV, Tên đăng nhập hoặc Họ tên..." class="search-input">
+                <button type="submit" class="btn-primary">Tìm kiếm</button>
+                {% if query %}
+                <a href="{{ url_for('main.admin_students') }}" class="btn-secondary">Xóa lọc</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Student Table -->
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">ID</th>
+                        <th style="width: 15%;">Mã Sinh viên</th>
+                        <th style="width: 15%;">Tên đăng nhập</th>
+                        <th style="width: 22%;">Họ và tên</th>
+                        <th style="width: 12%;">Trạng thái</th>
+                        <th style="width: 13%;">Ngày tạo</th>
+                        <th style="width: 15%;">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                    <tr>
+                        <td>{{ s.id }}</td>
+                        <td><strong>{{ s.student_code or '-' }}</strong></td>
+                        <td><code>{{ s.username }}</code></td>
+                        <td>{{ s.full_name or s.username }}</td>
+                        <td>
+                            {% if s.status == 'active' %}
+                            <span class="status-tag active">🟢 Hoạt động</span>
+                            {% else %}
+                            <span class="status-tag inactive">🔴 Tạm khóa</span>
+                            {% endif %}
+                        </td>
+                        <td><small class="text-muted">{{ s.created_at.strftime('%d/%m/%Y') if s.created_at else '-' }}</small></td>
+                        <td>
+                            <div class="action-buttons">
+                                <form action="{{ url_for('main.admin_toggle_student', id=s.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-sm {% if s.status == 'active' %}btn-warning{% else %}btn-success{% endif %}" title="Khóa/Mở khóa">
+                                        {{ '🔒 Khóa' if s.status == 'active' else '🔓 Mở' }}
+                                    </button>
+                                </form>
+                                <form action="{{ url_for('main.admin_delete_student', id=s.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa sinh viên này? Toàn bộ lịch sử chat sẽ bị xóa theo.');">
+                                    <button type="submit" class="btn-sm btn-danger" title="Xóa">🗑️</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<!-- Modal Thêm Sinh Viên -->
+<div id="add-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>➕ Cấp Tài khoản Sinh viên Mới</h3>
+            <button type="button" class="modal-close" onclick="document.getElementById('add-modal').style.display='none'">&times;</button>
+        </div>
+        <form method="POST" action="{{ url_for('main.admin_add_student') }}">
+            <div class="form-group">
+                <label>Mã Sinh viên CNTT (Khóa 24-26, ví dụ: 2451220001):</label>
+                <input type="text" name="student_code" placeholder="Ví dụ: 2451220001" required>
+                <small class="text-muted">Tên đăng nhập sẽ tự động trùng với Mã sinh viên.</small>
+            </div>
+            <div class="form-group">
+                <label>Họ và Tên (Tùy chọn):</label>
+                <input type="text" name="full_name" placeholder="Mặc định: Sinh viên <mã SV>">
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu khởi tạo (Tùy chọn):</label>
+                <input type="password" name="password" placeholder="Mặc định là chính mã sinh viên">
+                <small class="text-muted">Để trống để lấy mã sinh viên làm mật khẩu ban đầu. Không dùng 123456.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="document.getElementById('add-modal').style.display='none'">Hủy</button>
+                <button type="submit" class="btn-primary">Tạo tài khoản</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

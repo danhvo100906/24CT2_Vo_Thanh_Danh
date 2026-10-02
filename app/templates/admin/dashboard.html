@@ -1,23 +1,138 @@
-{% extends "base.html" %}
-{% block title %}Trang quản trị{% endblock %}
+﻿{% extends "base.html" %}
+{% block title %}Admin Dashboard - StudyBot{% endblock %}
 
 {% block content %}
-<div class="admin-layout">
-    <nav class="sidebar">
-        <h3>Admin Panel</h3>
-        <a href="{{ url_for('main.admin_dashboard') }}">Tổng quan</a>
-        <a href="{{ url_for('main.admin_users') }}">Quản lý người dùng</a>
-        <a href="#">Quản lý dữ liệu huấn luyện</a>
-        <a href="#">Quản lý tài liệu</a>
-        <a href="#">Giám sát hội thoại</a>
-        <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
-    </nav>
+<div class="app-layout admin-layout">
+    <aside class="app-sidebar admin-sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h3>Admin Panel</h3>
+                <small>StudyBot Management</small>
+            </div>
+        </div>
 
-    <main class="content">
-        <h2>Xin chào, {{ user.username }} (Admin)</h2>
-        <div class="stat-card">
-            <p>Tổng số người dùng</p>
-            <h1>{{ total_users }}</h1>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="menu-item active">
+                <span class="icon">📊</span> Tổng quan Dashboard
+            </a>
+            <a href="{{ url_for('main.admin_students') }}" class="menu-item">
+                <span class="icon">👥</span> Quản lý Sinh viên
+            </a>
+            <a href="{{ url_for('main.admin_materials') }}" class="menu-item">
+                <span class="icon">📚</span> Danh mục Tài liệu
+            </a>
+            <a href="{{ url_for('main.admin_knowledge') }}" class="menu-item">
+                <span class="icon">💡</span> Quản lý Tri thức
+            </a>
+            <a href="{{ url_for('main.admin_conversations') }}" class="menu-item">
+                <span class="icon">💬</span> Nhật ký Hội thoại & Logs
+            </a>
+        </nav>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">👨‍💼</div>
+            <div class="user-info">
+                <strong>{{ user.username }}</strong>
+                <small>Quản trị viên</small>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout" title="Đăng xuất">🚪</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <header class="main-header flex-between">
+            <div>
+                <h2>Bảng điều khiển Quản trị 🛡️</h2>
+                <p>Theo dõi hoạt động hệ thống, phản hồi sinh viên và cấu hình dữ liệu StudyBot</p>
+            </div>
+            <form action="{{ url_for('main.admin_retrain') }}" method="POST" onsubmit="return confirm('Bạn có chắc muốn huấn luyện lại mô hình PyTorch ngay bây giờ?');">
+                <button type="submit" class="btn-success btn-retrain">
+                    ⚡ Huấn luyện lại AI (PyTorch)
+                </button>
+            </form>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-box blue">
+                <div class="stat-title">Sinh viên trong hệ thống</div>
+                <div class="stat-number">{{ total_students }}</div>
+                <div class="stat-sub">Hoạt động: <strong>{{ active_students }}</strong> tài khoản</div>
+            </div>
+
+            <div class="stat-box green">
+                <div class="stat-title">Tổng lượt hỏi đáp</div>
+                <div class="stat-number">{{ total_chats }}</div>
+                <div class="stat-sub">Tương tác sinh viên qua bot</div>
+            </div>
+
+            <div class="stat-box purple">
+                <div class="stat-title">Tỷ lệ hài lòng (Feedback)</div>
+                <div class="stat-number">{{ satisfaction_rate }}%</div>
+                <div class="stat-sub">👍 {{ helpful_feedbacks }} Hữu ích / 👎 {{ unhelpful_feedbacks }} Chưa rõ</div>
+            </div>
+
+            <div class="stat-box orange">
+                <div class="stat-title">Học phần & Tri thức</div>
+                <div class="stat-number">{{ total_materials }}</div>
+                <div class="stat-sub">{{ total_knowledge }} mục tri thức Knowledge Base</div>
+            </div>
+        </div>
+
+        <!-- Recent Conversations -->
+        <div class="admin-section">
+            <div class="section-header flex-between">
+                <h3>10 Lượt câu hỏi gần nhất của Sinh viên</h3>
+                <a href="{{ url_for('main.admin_conversations') }}" class="btn-link">Xem tất cả hội thoại &rarr;</a>
+            </div>
+
+            {% if recent_chats %}
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">Thời gian</th>
+                            <th style="width: 15%;">Sinh viên</th>
+                            <th style="width: 30%;">Câu hỏi</th>
+                            <th style="width: 15%;">Intent</th>
+                            <th style="width: 12%;">Độ tin cậy</th>
+                            <th style="width: 16%;">Đánh giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in recent_chats %}
+                        <tr>
+                            <td><small class="text-muted">{{ c.created_at.strftime('%d/%m %H:%M') if c.created_at else '-' }}</small></td>
+                            <td><strong>{{ c.user.username if c.user else 'N/A' }}</strong></td>
+                            <td>{{ c.message }}</td>
+                            <td><span class="badge-intent">{{ c.intent or 'N/A' }}</span></td>
+                            <td>
+                                {% if c.confidence %}
+                                <span class="badge-confidence {% if c.confidence >= 0.75 %}high{% elif c.confidence >= 0.50 %}med{% else %}low{% endif %}">
+                                    {{ (c.confidence * 100)|round(1) }}%
+                                </span>
+                                {% else %}-{% endif %}
+                            </td>
+                            <td>
+                                {% if c.feedback %}
+                                <span class="fb-tag fb-{{ c.feedback.rating }}">
+                                    {{ '👍 Hữu ích' if c.feedback.rating == 'helpful' else '👎 Chưa rõ' }}
+                                </span>
+                                {% else %}
+                                <span class="text-muted"><small>Chưa đánh giá</small></span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>Chưa có cuộc hội thoại nào trong hệ thống.</p>
+            </div>
+            {% endif %}
         </div>
     </main>
 </div>

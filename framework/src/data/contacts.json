@@ -1,0 +1,42 @@
+[
+    {
+        "id": "CONT01",
+        "department": "Phòng Quản lý Đào tạo",
+        "function": "Quản lý chương trình đào tạo, đăng ký môn học, lịch thi, cấp bảng điểm và xét tốt nghiệp",
+        "phone": "(0236) 3779.999",
+        "email": "daotao@dau.edu.vn",
+        "location": "Tầng 1 - Khu Hiệu bộ",
+        "source": "Cổng thông tin Trường ĐH Kiến trúc Đà Nẵng",
+        "updated_at": "2024-08-01"
+    },
+    {
+        "id": "CONT02",
+        "department": "Phòng Công tác sinh viên (CTSV)",
+        "function": "Giải quyết chế độ chính sách, học bổng, giấy xác nhận sinh viên, thẻ SV, điểm rèn luyện",
+        "phone": "(0236) 3779.888",
+        "email": "ctsv@dau.edu.vn",
+        "location": "Tầng 1 - Nhà Đa năng",
+        "source": "Cổng thông tin Trường ĐH Kiến trúc Đà Nẵng",
+        "updated_at": "2024-08-01"
+    },
+    {
+        "id": "CONT03",
+        "department": "Văn phòng Khoa Công nghệ Thông tin",
+        "function": "Tư vấn học tập chuyên ngành, đồ án môn học, cố vấn học tập lớp 24CT2",
+        "phone": "(0236) 3779.777",
+        "email": "cntt@dau.edu.vn",
+        "location": "Tầng 3 - Nhà Thí nghiệm & Thực hành",
+        "source": "Cổng thông tin Khoa CNTT - DAU",
+        "updated_at": "2024-08-01"
+    },
+    {
+        "id": "CONT04",
+        "department": "Phòng Kế hoạch - Tài chính",
+        "function": "Thu học phí, giải quyết đơn xin gia hạn nộp học phí, hoàn trả học phí môn hủy",
+        "phone": "(0236) 3779.666",
+        "email": "taichinh@dau.edu.vn",
+        "location": "Tầng 2 - Khu Hiệu bộ",
+        "source": "Cổng thông tin Trường ĐH Kiến trúc Đà Nẵng",
+        "updated_at": "2024-08-01"
+    }
+]
